@@ -1,0 +1,20 @@
+one_column:
+  label: One column
+  category: CoGov Layouts
+  template: templates/one-column/one-column
+  css: css/ci_layouts.css
+  icon: templates/one-column/screenshot.png
+  regions:
+    main:
+      label: Main content
+two_column:
+  label: Two column
+  category: CoGov Layouts
+  template: templates/two-column/two-column
+  css: css/ci_layouts.css
+  icon: templates/two-column/screenshot.png
+  regions:
+    main:
+      label: Main content
+    sidebar:
+      label: Sidebar
