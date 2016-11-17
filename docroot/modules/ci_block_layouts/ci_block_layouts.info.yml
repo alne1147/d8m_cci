@@ -1,0 +1,13 @@
+name: CI Block Layouts
+description: Bootstrap template suggestions for Block Styles.
+type: module
+package: Styles
+# core: 8.x
+dependencies:
+  - block_styles
+
+# Information added by Drupal.org packaging script on 2015-12-16
+version: '8.x-1.1'
+core: '8.x'
+project: 'ci_block_layouts'
+datestamp: 1450280346

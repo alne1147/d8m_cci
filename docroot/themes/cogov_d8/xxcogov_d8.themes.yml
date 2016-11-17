@@ -1,0 +1,17 @@
+block__clean:
+  label: Clean TEST
+  type: block
+  category: Block
+  configuration:
+    path: templates/blocks/clean
+    base hook: block
+    render element: elements
+block__boo:
+  label: Dark Rounded Edges
+  type: block
+  category: Block
+  configuration:
+    path: templates/blocks/dark-rounded
+    base hook: block
+    render element: elements
+
