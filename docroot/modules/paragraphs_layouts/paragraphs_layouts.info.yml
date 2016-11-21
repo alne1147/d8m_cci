@@ -1,0 +1,15 @@
+name: Paragraphs flexbox layouts
+type: module
+description: A flexbox based layout system for paragraphs
+# core: 8.x
+package: PNX
+
+dependencies:
+  - paragraphs
+  - classy_paragraphs
+
+# Information added by Drupal.org packaging script on 2016-11-04
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'paragraphs_layouts'
+datestamp: 1478233162

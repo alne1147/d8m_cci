@@ -1,0 +1,23 @@
+{
+  "name": "ci_xy",
+  "version": "0.0.1",
+  "devDependencies": {
+    "browser-sync": "^2.4.0",
+    "embittered": "0.0.9",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.2.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-react": "^3.0.1",
+    "gulp-sass": "*",
+    "gulp-shell": "^0.4.0",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "*",
+    "gulp-watch": "*"
+
+  },
+  "scripts": {
+    "postinstall": "node_modules/.bin/rimraf node_modules/**/*.info"
+  }
+}
