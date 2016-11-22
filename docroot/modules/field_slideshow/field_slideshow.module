@@ -1,0 +1,296 @@
+<?php
+
+/**
+ * @file
+ * Preprocess and theme hook functions.
+ */
+
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_theme().
+ */
+function field_slideshow_theme() {
+  return array(
+    'field_slideshow' => array(
+      'variables'     => array(
+        'items'                 => NULL,
+        'image_style'           => NULL,
+        'image'                 => NULL,
+        'order'                 => NULL,
+        'controls'              => NULL,
+        'controls_pause'        => NULL,
+        'controls_position'     => NULL,
+        'pager'                 => NULL,
+        'pager_position'        => NULL,
+        'pager_image_style'     => NULL,
+        'carousel_image_style'  => NULL,
+        'entity'                => NULL,
+        'breakpoints'           => NULL,
+        'slideshow_id'          => NULL,
+        'js_variables'          => array(),
+      ),
+      'path' => drupal_get_path('module', 'field_slideshow') . '/templates',
+      'render element'     => 'field_slideshow',
+    ),
+    'field_slideshow_controls' => array(
+      'variables'    => array(
+        'slideshow_id'          => NULL,
+        'controls_pause'        => NULL,
+      ),
+      'path' => drupal_get_path('module', 'field_slideshow') . '/templates',
+      'render element'     => 'field_slideshow_controls',
+    ),
+    'field_slideshow_pager' => array(
+      'variables'    => array(
+        'items'                 => NULL,
+        'pager'                 => NULL,
+        'pager_image_style'     => NULL,
+        'carousel_image_style'  => NULL,
+        'slideshow_id'          => NULL,
+        'carousel_skin'         => NULL,
+        'check' => NULL,
+        'fc_image_field'        => NULL,
+      ),
+      'path' => drupal_get_path('module', 'field_slideshow') . '/templates',
+      'render element'     => 'field_slideshow_pager',
+    ),
+  );
+}
+
+/**
+ * Implements template_preprocess().
+ */
+function template_preprocess_field_slideshow(&$variables) {
+
+  $items = $variables['items'];
+
+  // Add the JQuery plugins and the JS code.
+  $libraries_module_exists = \Drupal::moduleHandler()->moduleExists('libraries');
+  $colorbox_module_exists = \Drupal::moduleHandler()->moduleExists('colorbox');
+  if ($libraries_module_exists) {
+    $libraries_path = DRUPAL_ROOT . '/libraries';
+    // Add js variables.
+    $js_variables = $variables["js_variables"];
+    $variables['#attached']['library'][] = 'field_slideshow/field_slideshow.view';
+    $variables['#attached']['drupalSettings']['field_slideshow'] = array(
+      'field-slideshow-' . $variables['slideshow_id'] => $js_variables,
+    );
+    if (file_exists($libraries_path . '/jquery.cycle/jquery.cycle.all.min.js')) {
+      $variables['#attached']['library'][] = 'field_slideshow/field_slideshow.jquery.cycle.min';
+    }
+    elseif (file_exists($libraries_path . '/jquery.cycle/jquery.cycle.all.js')) {
+      $variables['#attached']['library'][] = 'field_slideshow/field_slideshow.jquery.cycle.all';
+    }
+
+    if ($colorbox_module_exists) {
+      $colorbox_attachment = \Drupal::service('colorbox.attachment');
+      $colorbox_applicable = $colorbox_attachment->isApplicable();
+      if ($colorbox_applicable) {
+        $colorbox_attachment->attach($variables);
+      }
+      $variables['#attached']['library'][] = 'colorbox/colorbox-dev';
+      $variables['#attached']['library'][] = 'colorbox/default';
+      $variables['#attached']['library'][] = 'colorbox/init';
+    }
+  }
+
+  // Change order if needed.
+  if (isset($variables['order'])) {
+    $get_slide = $items->getValue();
+    if ($variables['order'] == 'reverse') {
+      $slide_order = array_reverse($get_slide);
+      $items->setValue($slide_order);
+    }
+    elseif ($variables['order'] == 'random') {
+      shuffle($get_slide);
+      $items->setValue($get_slide);
+    }
+  }
+
+  // Generate slides.
+  $field_slideshow_zebra = 'odd';
+  $variables['slides_max_width'] = 0;
+  $variables['slides_max_height'] = 0;
+  $slide_theme = (isset($variables['breakpoints']) && isset($variables['breakpoints']['mapping']) && !empty($variables['breakpoints']['mapping'])) ? 'picture' : 'image_style';
+  $variables['slide'] = array();
+  $variables['slides_max_width'] = 0;
+  $variables['slides_max_height'] = 0;
+  $variables['colorbox_img_path'] = '';
+  foreach ($items as $num => $item) {
+    if (!empty($item->getValue()['fc_path'])) {
+      if ($item->getValue()['fc_path'] != '') {
+        $variables['fc_url'] = 1;
+        $node_path = \Drupal::url($item->getValue()['fc_path']->getRouteName(), $item->getValue()['fc_path']->getRouteParameters());
+        $variables['fc'][$num]['path'] = $node_path;
+      }
+      else {
+        $variables['fc_url'] = '';
+      }
+      $variables['image'][$num]['#item_attributes'] = array_merge(
+        $variables['image'][$num]['#item_attributes'], array(
+          'class' => 'field-slideshow-image field-slideshow-image-' . (1 + $num)
+        )
+      );
+    }
+    elseif (!empty($item->getValue()['fc_file_path'])) {
+      if ($item->getValue()['fc_file_path'] != '') {
+        $variables['fc_url'] = 1;
+        $file_path = $item->getValue()['fc_file_path']->getUri();
+        $variables['fc'][$num]['path'] = $file_path;
+      }
+      else {
+        $variables['fc_url'] = '';
+      }
+    }
+
+    // Generate classes.
+    $field_slideshow_zebra = ($field_slideshow_zebra == 'odd') ? 'even' : 'odd';
+    $classes[] = $field_slideshow_zebra;
+    if ($num == 0) {
+      $classes[] = 'first';
+    }
+    elseif ($num == count($items) - 1) {
+      $classes[] = 'last';
+    }
+    $variables['slide'][$num]['classes'] = implode(' ', $classes);
+
+    // Colorbox!
+    if (!is_object($item->getValue()['path'])) {
+      $variables['colorbox_img_path'][$num]['path'] = $item->getValue()['path']['uri'];
+    }
+
+    $variables['image_url'] = $variables['image'][$num]['#url'];
+    if ($variables['image_url'] == '' && $variables['colorbox_img_path'][$num]['path'] != '') {
+      $variables['colorbox_attributes'][$num] = new Attribute();
+      $variables['colorbox_attributes'][$num]['title'] = $items[$num]->getValue()['path']['attributes']['title'];
+      $variables['colorbox_attributes'][$num]['rel'] = $items[$num]->getValue()['path']['attributes']['rel'];
+      $variables['colorbox_attributes'][$num]['class'] = $items[$num]->getValue()['path']['attributes']['class'];
+    }
+  }
+
+  // Don't add controls if there's only one image.
+  if (count($items) == 1) {
+    $variables['controls'] = '';
+    $variables['pager'] = '';
+  }
+}
+
+/**
+ * Implements template_preprocess().
+ */
+function template_preprocess_field_slideshow_pager(&$variables) {
+
+  $items = $variables['items'];
+  $fc_image_field = $variables['fc_image_field'];
+
+  // Add thumbnails pager/carousel if needed.
+  if (isset($variables['pager']) && ($variables['pager'] == 'image' || $variables['pager'] == 'carousel')) {
+    if ($variables['pager'] == 'carousel') {
+      $thumbnail_style = $variables['carousel_image_style'];
+      if (isset($variables['carousel_skin']) && $variables['carousel_skin']) {
+        $variables['#attached']['library'][] = 'field_slideshow/field_slideshow.field_slideshow.jquery.carousel.skin.' . $variables['carousel_skin'];
+      }
+    }
+    else {
+      $thumbnail_style = $variables['pager_image_style'];
+    }
+
+    $thumbnails = array();
+    foreach ($items as $num => $item) {
+      $thumbnail = array();
+      if (!empty($variables['check'])) {
+        $thumbnail['path'] = $item->getValue()['fc_thumbnail_path'];
+      }
+      else {
+        $thumbnail['path'] = $item->entity->getFileUri();
+      }
+      $thumbnail['attributes'] = $item->_attributes;
+      $thumbnail['attributes']['class'] = array(
+        'field-slideshow-thumbnail',
+        'field-slideshow-thumbnail-' . (1 + $num),
+      );
+      $thumbnail['alt'] = isset($item->alt) ? $item->alt : '';
+      if (isset($item->width) && isset($item->height)) {
+        $thumbnail['width'] = $item->width;
+        $thumbnail['height'] = $item->height;
+      }
+      else {
+        $thumbnail_dims = getimagesize($thumbnail['path']);
+        $thumbnail['width'] = $thumbnail_dims[0];
+        $thumbnail['height'] = $thumbnail_dims[1];
+      }
+      if (isset($item->title) && strlen($item->title) > 0) {
+        $thumbnail['title'] = $item->title;
+      }
+
+      // @todo: need to add cache tags in image.
+      if (!empty($variables['check'])) {
+        $fc_image_item = $item->getFieldCollectionItem()->get($fc_image_field)->first();
+        $thumbnail_output = array(
+          '#theme'           => 'image_formatter',
+          '#item'            => $fc_image_item,
+          '#item_attributes' => $thumbnail['attributes'],
+          '#url'             => "#",
+        );
+      }
+      else {
+        $thumbnail_output = array(
+          '#theme'           => 'image_formatter',
+          '#item'            => $item,
+          '#item_attributes' => $thumbnail['attributes'],
+          '#url'             => "#",
+        );
+      }
+      if ($thumbnail_style) {
+        $thumbnail_output['#image_style'] = $thumbnail_style;
+      }
+
+      $thumbnails[] = $thumbnail_output;
+    }
+
+    $variables['thumbnails'] = array(
+      '#theme'      => 'item_list',
+      '#items'       => $thumbnails,
+      '#attributes'  => array(
+        'id'    => 'field-slideshow-' . $variables['slideshow_id'] . '-pager',
+        'class' => 'field-slideshow-pager slides-' . count($items),
+      ),
+    );
+  }
+  $variables['items_count'] = count($items);
+}
+
+/**
+ * Implements hook_colorbox_settings_alter().
+ */
+function field_slideshow_colorbox_settings_alter(&$settings, &$style) {
+  $node = \Drupal::request()->attributes->get('node');
+  if ($node) {
+    $type = $node->getType();
+    $mode = \Drupal::service('entity_display.repository')->getViewModes('node');
+    $config_entity_name = 'core.entity_view_display.node.' . $type . '.default';
+    $query = db_select('config', 'c');
+    $result = $query->fields('c')
+      ->condition('name', $config_entity_name)
+      ->execute()
+      ->fetchAssoc();
+    $formatter_data = unserialize($result['data']);
+
+    foreach ($formatter_data['content'] as $content) {
+      if (isset($content['type']) && ($content['type'] == 'slideshow' || $content['type'] == 'field_collection_slideshow')) {
+
+        $content_settings = $content['settings'];
+        $colorbox_slideshow = $content_settings['slideshow_colorbox_slideshow'];
+        if (isset($colorbox_slideshow) && $colorbox_slideshow != '' && $colorbox_slideshow == 'automatic') {
+          $settings['slideshow'] = TRUE;
+          $settings['slideshowAuto'] = TRUE;
+          $settings['transition'] = $content_settings['slideshow_colorbox_transition'];
+          $settings['transition_speed'] = $content_settings['slideshow_colorbox_speed'];
+          $settings['slideshowSpeed'] = $content_settings['slideshow_colorbox_slideshow_speed'];
+        }
+      }
+    }
+  }
+}
