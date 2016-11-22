@@ -4,5 +4,5 @@ description: 'Adds an updates report and revert functionality to configuration m
 core: 8.x
 configure: config_update.report
 dependencies:
-  - config_update
-  - config
+  - config_update:config_update
+  - drupal:config
