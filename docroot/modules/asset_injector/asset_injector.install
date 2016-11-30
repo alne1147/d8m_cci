@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Contains install and uninstall hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function asset_injector_uninstall() {
+  file_unmanaged_delete_recursive(file_build_uri('/asset_injector'));
+}
