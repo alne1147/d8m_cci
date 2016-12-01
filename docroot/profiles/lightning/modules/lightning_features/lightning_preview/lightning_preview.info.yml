@@ -8,8 +8,8 @@ dependencies:
   - lightning_workflow
   - workspace
 
-# Information added by Drupal.org packaging script on 2016-11-16
-version: '8.x-1.13'
+# Information added by Drupal.org packaging script on 2016-11-29
+version: '8.x-2.x-dev'
 core: '8.x'
 project: 'lightning'
-datestamp: 1479331711
+datestamp: 1480447086
