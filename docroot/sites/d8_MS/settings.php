@@ -760,3 +760,8 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
   require $_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR'] . '/cld_devcloud_d8cogov_dev_d8_MS.inc';
 }
 // </DDSETTINGS>
+$settings['install_profile'] = 'lightning';
+
+if (file_exists('/var/www/site-php')) {
+    require('/var/www/site-php/d8cogov/d8_MS-settings.inc');
+}
