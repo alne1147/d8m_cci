@@ -1,3 +1,44 @@
+## 2.0.2
+* Workbench Moderation was updated to 8.x-1.2. (Issue #2838896)
+* All info files supplied with Lightning's components now have consistent
+  version numbers. (Issue #2839593)
+* Lightning now installs the Diff module by default. (Issue #2762325)
+* We now verify that all Lightning YAML files are compatible with the strict
+  PECL parser.
+* Lightning now installs the core Contact module by default, and includes
+  and installs the Contact Storage contrib module to provide basic form
+  building and submission management functionality -- a pared-down Webform
+  that should suffice for many simple use cases. (Issue #2666424)
+* Fixed a problem where Lightning Extension's subcontexts for Drupal Extension
+  would not be autoloaded by Behat. (Issue #2836258)
+* Fixed a fatal error when trying to display a description for a view mode
+  that does not exist. (GitHub #254)
+* All titles, links and headings were changed to sentence case. (GitHub #252)
+
+## 2.0.1
+* Replaced test files with generic Lightning logos. (Issue #2836442)
+
+##  2.0.0
+* Switched to the official Drupal.org packagist.
+
+## 1.14
+* Added Panelizer support for view mode descriptions. (Issue #2828638)
+* Tarball releases are now built with contrib versions from drupal.org and not
+  git (Issue #2827227)
+* Updated Panelizer patch to fix a problem where it did not properly define its
+  dependency on Field UI (GitHub #226)
+* Improved the author-facing Panelizer experience by implementing "Internal"
+  View Modes for which Panelizer is always disabled. (GitHub #194 & 223)
+* Fixed a bug where Lightning assumptions + certain contrib modules would cause
+  an infinite loop. (Issue #2831550)
+* Included a script that will convert your project's root composer.json file to
+  use the official Drupal.org packagist and update your project to Lightning
+  2.0.0 which also uses the official Packagist. (See: [Lightning Packagist Switch](http://lightning.acquia.com/blog/packagist-switch))
+* Lightning no longer provides default content for the Shortcut menu.
+  (Issue #2834874)
+* Made it possible for modules and themes to pass CSS to a CKEditor instance.
+  (Issue #2729377)
+
 ## 1.13
 * Tests now ensure that composer.lock is kept up to date. (GitHub #132)
 * The page title block is now properly placed in the Seven theme. (GitHub #190)
