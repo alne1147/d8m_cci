@@ -20,8 +20,8 @@ function flexslider_libraries_info() {
     'download url' => 'https://github.com/woothemes/FlexSlider',
     'version arguments' => array(
       'file' => 'jquery.flexslider-min.js',
-      // jQuery FlexSlider v2.1.
-      'pattern' => '/jQuery FlexSlider v(\d+\.+\d+)/',
+      // e.g. jQuery FlexSlider v2.1.
+      'pattern' => '/jQuery FlexSlider v(\d+\.+\d+(\.+\d+)?)/',
       'lines' => 2,
     ),
     'files' => array(
@@ -30,11 +30,6 @@ function flexslider_libraries_info() {
       ),
       'css' => array(
         'flexslider.css',
-      ),
-    ),
-    'integration files' => array(
-      'flexslider' => array(
-        'css' => array('assets/css/flexslider_img.css'),
       ),
     ),
   );
@@ -63,83 +58,36 @@ function flexslider_libraries_info_alter(&$libraries) {
 }
 
 /**
- * Implements hook_library_info_build().
- *
- * We also define FlexSlider through the core library callbacks.
- */
-function flexslider_library_info_build() {
-  $libraries = [];
-
-  $library_path = libraries_get_path('flexslider');
-  if (strpos($library_path, '/') !== 0) {
-    $library_path = '/' . $library_path;
-  }
-
-  $libraries['flexslider'] = array(
-    'title' => 'FlexSlider',
-    'remote' => 'http://flexslider.woothemes.com',
-    'version' => FLEXSLIDER_VERSION,
-    'license' => array(
-      'name' => 'GNU-GPL-2.0-or-later',
-      'url' => 'https://github.com/woothemes/FlexSlider/blob/master/LICENSE.md',
-      'gpl-compatible' => TRUE,
-    ),
-    'dependencies' => array(
-      'core/jquery',
-      'core/drupal',
-      'core/drupalSettings',
-      'core/jquery.once',
-    ),
-    'js' => array(
-      $library_path . '/jquery.flexslider-min.js' => array(
-        'scope' => 'footer',
-        'minified' => TRUE,
-      ),
-      'assets/js/flexslider.load.js' => array(
-        'scope' => 'footer',
-      ),
-    ),
-    'css' => array(
-      'theme' => array(
-        $library_path . '/flexslider.css' => array(
-          'media' => 'screen',
-        ),
-        'assets/css/flexslider_img.css' => array(
-          'media' => 'screen',
-        ),
-      ),
-    ),
-  );
-
-  // Add support for jQuery Easing module.
-  if (\Drupal::moduleHandler()->moduleExists('jqeasing')) {
-    // Using the jqeasing module.
-    $libraries['flexslider']['dependencies'][] = 'jqeasing.easing';
-  }
-
-  return $libraries;
-}
-
-/**
  * Implements hook_library_info_alter().
  */
 function flexslider_library_info_alter(&$libraries, $extension) {
-  // Enable debug mode.
-  if (FLEXSLIDER_DEBUG) {
-    if ($extension == 'flexslider' and isset($libraries['flexslider'])) {
-      $library_path = libraries_get_path('flexslider');
-      if (strpos($library_path, '/') !== 0) {
-        $library_path = '/' . $library_path;
-      }
-      // Prepend the unminified version.
-      $libraries['flexslider']['js'] = array(
-        $library_path . '/jquery.flexslider.js' => array(
-          'scope' => 'footer',
-        ),
-      ) + $libraries['flexslider']['js'];
-      // Remove the minified version.
-      unset($libraries['flexslider']['js'][$library_path . '/jquery.flexslider-min.js']);
+  if ($extension == 'flexslider' and isset($libraries['flexslider'])) {
+    $library_path = libraries_get_path('flexslider');
+    if (strpos($library_path, '/') !== 0) {
+      $library_path = '/' . $library_path;
     }
+
+    // Set the correct path to where the library was downloaded.
+    $libraries['flexslider']['js'][$library_path . '/jquery.flexslider-min.js'] = $libraries['flexslider']['js']['jquery.flexslider-min.js'];
+    unset($libraries['flexslider']['js']['jquery.flexslider-min.js']);
+
+    $libraries['flexslider']['css']['component'][$library_path . '/flexslider.css'] = $libraries['flexslider']['css']['component']['flexslider.css'];
+    unset($libraries['flexslider']['css']['component']['flexslider.css']);
+
+    // Enable debug mode.
+    if (FLEXSLIDER_DEBUG) {
+      // Add the unminified version.
+      $libraries['flexslider']['js'] = array(
+        $library_path . '/jquery.flexslider.js' => array(),
+      );
+    }
+
+    // Add support for jQuery Easing module.
+    if (\Drupal::moduleHandler()->moduleExists('jqeasing')) {
+      // Using the jqeasing module.
+      $libraries['flexslider']['dependencies'][] = 'jqeasing.easing';
+    }
+
   }
 }
 
@@ -163,7 +111,7 @@ function flexslider_help($route_name, \Drupal\Core\Routing\RouteMatchInterface $
       $output .= '<dt>' . t('Defining option sets') . '</dt>';
       $output .= '<dd>' . t('No matter how you want to use FlexSlider (with fields or views) you need to define "option sets" to tell FlexSlider how you want it to display. Go to the <a href=":flexslider_admin">flexslider administration page</a>. From there you can edit the default option set and define new ones. These will be listed as options in the various forms where you setup FlexSlider to display. NOTE: under advanced options, you can set a namespace prefix for the optionset. This will allow you to build custom CSS for each optionset.  Start by copying the flexslider_img.css from the assets subfolder to your theme. Build new custom CSS for each prefix in your optionsets.', array(':flexslider_admin' => Url::fromRoute('entity.flexslider.collection')->getInternalPath())) . '</dd>';
       $output .= '<dt>' . t('Configuring FlexSlider field') . '</dt>';
-      $output .= '<dd>' . t('The flexslider_fields module provides a way for you to turn a multi-file image field into a FlexSlider. Simply go to the "Manage Display" page of the Content type (or other Entity) containing your field and set the Format of the field to FlexSlider. There you can select your preferred option set and image style.') . '</dd>';
+      $output .= '<dd>' . t('The flexslider_fields module provides a way for you to turn a multi-file image field into a FlexSlider. Simply go to the "Manage Display" page of the Content type (or other Entity) containing your field and set the Format of the field to FlexSlider. There you can select your preferred option set and image style. The Responsive FlexSlider formatter is also available when core Responsive Image module is enabled.') . '</dd>';
       $output .= '<dt>' . t('Configuring FlexSlider view style') . '</dt>';
       $output .= '<dd>' . t('Flex Slider Views (flexslider_views module) allows you to build views which display their results in Flex Slider. Similar to how you can output fields as an "HTML List" or "Table", you can now select "Flex Slider" as an option. Create or edit a view and ensure it can load a content type which contain image fields. Set your display fields to include an image field. In the field settings, DO NOT SET THE FORMATTER TO FLEXSLIDER. This will attempt to put Flex Sliders inside other Flex Sliders and will just get messy. Ensure you don\'t include any wrapper markup, labels or container markup for the field value itself. Save your field. Next, go to "Format" in the main Views windows. Click and select "Flex Slider", then select your option set. Save your view and you should see your results displayed in Flex Slider.') . '</dd>';
       $output .= '<dt>' . t('Attaching the library') . '</dt>';
@@ -258,7 +206,7 @@ function flexslider_add($id = NULL, $optionset = NULL) {
   // @todo not currently in use
   $cache = &drupal_static(__FUNCTION__, array());
 
-  $attached['library'][] = 'flexslider/flexslider';
+  $attached['library'][] = 'flexslider/integration';
 
   // If the ID or optionset aren't set, it is assumed the settings will be set
   // manually via the calling module/theme.

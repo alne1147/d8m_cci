@@ -1,7 +1,8 @@
-name: Lightning Layout
+name: 'Lightning Layout'
+# core: 8.x
 type: module
 description: 'Provides the tools to take control of your layout.'
-# core: 8.x
+# version: '8.x-2.02'
 package: Lightning
 dependencies:
   - lightning_core
@@ -9,9 +10,11 @@ dependencies:
   # decoupled; see the issue summary in https://www.drupal.org/node/2600634.
   - page_manager
   - panelizer
+components:
+  - lightning_landing_page
 
-# Information added by Drupal.org packaging script on 2016-11-29
-version: '8.x-2.x-dev'
+# Information added by Drupal.org packaging script on 2017-01-04
+version: '8.x-2.02'
 core: '8.x'
 project: 'lightning'
-datestamp: 1480447086
+datestamp: 1483567748
