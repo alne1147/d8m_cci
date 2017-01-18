@@ -1,3 +1,8 @@
+/* THEME
+ * Describe how modules or layouts might look (global modifiers)
+ */
+@import "theme/variables";
+
 /* BASE
  * Defaults e.g, html, body
  * No css classes permitted in Base elements
@@ -23,11 +28,6 @@
 /* STATE
  * How our modules or layouts will look when in a particular state. (e.x. hover, active, media query)
  */
-
-/* THEME
- * Describe how modules or layouts might look (global modifiers)
- */
-@import "theme/variables";
 
 /* BOOTSTRAP
  * version: 3.3.7
