@@ -21,6 +21,7 @@ regions:
   sidebar_first: 'Primary'
   sidebar_second: 'Secondary'
   footer: 'Footer'
+  global_footer: 'Global Footer'
   page_top: 'Page top'
   page_bottom: 'Page bottom'
 
