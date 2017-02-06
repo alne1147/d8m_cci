@@ -57,6 +57,12 @@
  */
 #}
 {% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{# Branding #}
+{% block branding %}
+  <header role="banner" class="{{ container }}">
+    {{ page.branding }}
+  </header>
+{% endblock %}
 {# Navbar #}
 {% if page.navigation or page.navigation_collapsible %}
   {% block navbar %}
@@ -189,3 +195,20 @@
     </footer>
   {% endblock %}
 {% endif %}
+{% block global_footer %}
+<footer class="l-footer__global" role="contentinfo" style="background:gray">
+  <div class="container" style="background:#222">
+    <div class="row">
+      <div class="col-md-10">
+        <ul>
+          <li>Global footer links</li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        Logo Placement
+      </div>
+    </div>
+  </div>
+  {{ page.global_footer }}
+</footer>
+{% endblock %}
