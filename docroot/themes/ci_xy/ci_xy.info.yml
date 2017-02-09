@@ -1,0 +1,30 @@
+core: 8.x
+type: theme
+base theme: bootstrap
+
+name: 'ci_xy'
+description: 'Uses the Bootstrap framework Sass source files and must be compiled (not for beginners).'
+package: 'Bootstrap'
+
+regions:
+  branding: 'Branding'
+  search: 'Search'
+  navigation: 'Navigation'
+  background: 'Background'
+  navigation_collapsible: 'Navigation (Collapsible)'
+  jumbotron: 'Jumbotron'
+  header: 'Top Bar'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  breadcrumbs: 'Breadcrumbs'
+  content: 'Content'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  footer: 'Footer'
+  global_footer: 'Global Footer'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+
+libraries:
+  - 'ci_xy/global-styling'
+  - 'ci_xy/bootstrap-scripts'

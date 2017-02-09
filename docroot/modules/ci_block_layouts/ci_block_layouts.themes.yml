@@ -1,0 +1,11 @@
+block__darkRound:
+  label: Dark Round
+  type: block
+  category: Block
+  configuration:
+    path: templates/darkRound
+    base hook: block
+    render element: elements
+  extras:
+    placement: 1
+    label: 1

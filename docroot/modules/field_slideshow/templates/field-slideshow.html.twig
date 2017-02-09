@@ -1,0 +1,84 @@
+{#
+/**
+ * @file
+ * Template file for field_slideshow
+ *
+ *
+ */#}
+
+{% 
+  set classes = [
+    'field-slideshow',
+    'field-slideshow-' ~ slideshow_id,
+    'effect-' ~ js_variables.fx,
+    'timeout-' ~ js_variables.timeout,
+    pager is defined and pager != '' ? 'with-pager',
+    controls is defined ? 'with-controls'
+  ]
+%}
+{% if controls_position is not defined %}
+  {% set controls_position = "after" %}
+{% endif %}
+
+{% if pager_position is not defined %}
+  {% set pager_position = "after" %}
+{% endif %}
+
+<div id="field-slideshow-{{ slideshow_id }}-wrapper" class="field-slideshow-wrapper">
+  {% if controls_position == 'before' %}
+    {{ controls }}
+  {% endif %}
+  {% if pager_position == 'before' %}
+    {{ pager }}
+  {% endif %}
+  {% if breakpoints is defined and breakpoints.mapping is defined and breakpoints.mapping is not empty %}
+    {% set style = 'height:' ~ slides_max_height ~ 'px' %}
+  {% else %}
+    {% set style = 'width:' ~ slides_max_width ~ 'px; height:' ~ slides_max_height ~ 'px' %}
+  {% endif %}
+
+  <div{{ attributes.addClass(classes).setAttribute('style', style) }}>
+    {% for num,item in items %}
+      {% set itemVal = item.getValue() %}
+      {%
+        set classes = [
+          'field-slideshow-slide', 
+          'field-slideshow-slide-' ~ (1+num)
+        ]
+      %}
+      {% set style = (num) ? 'display:none' %}
+      <div class="field-slideshow-slide field-slideshow-slide-{{1+num}} {{slide[num]['classes']}}" style="{{style}}">
+        {% if colorbox_img_path[num]['path'] is not empty and image_url == '' %}
+          <a href="{{ colorbox_img_path[num]['path'] }}" {{ colorbox_attributes[num] }}>
+            {{ image[num] }}
+          </a>
+        {% elseif fc_url is not empty %}
+          <a href="{{ fc[num]['path'] }}">
+            {{ image[num] }}
+          </a>        
+        {% else %}
+          {{ image[num] }}
+        {% endif %}
+        {% if itemVal['caption'] is defined and itemVal['caption'] != '' %}
+          <div class="field-slideshow-caption">
+            {% if itemVal['caption_path'] != '' %}
+              <span class="field-slideshow-caption-text">
+                {{ link(itemVal['caption'], itemVal['caption_path']) }}
+              </span>
+            {% else %}
+              <span class="field-slideshow-caption-text">
+                {{ itemVal['caption'] }}
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if controls_position != "before" %}
+    {{ controls }}
+  {% endif %}
+  {% if pager_position != "before" %}
+    {{ pager }}
+  {% endif %}
+</div>

@@ -1,0 +1,41 @@
+{#
+/**
+ * @file
+ * Template file for field_slideshow_pager
+ *
+ *
+ */#}
+{% if pager == 'number' %}
+
+  {%
+    set classes = [
+      'field-slideshow-pager',
+      'slides-' ~ items_count,
+    ]
+  %}
+
+  <div id="field-slideshow-{{ slideshow_id }}-pager"{{attributes.addClass(classes)}}></div>
+
+{% elseif pager == 'image' or pager == 'carousel'  %}
+
+  {% if pager == 'carousel'  %}
+    {%
+      set slideclasses = [
+        'field-slideshow-carousel-wrapper',
+        pager == 'carousel' and carousel_skin ? 'jcarousel-skin-' ~ carousel_skin
+      ]
+    %}
+    <div id="field-slideshow-{{ slideshow_id }}-carousel-wrapper" {{attributes.addClass(slideclasses)}}>
+      {% if not carousel_skin  %}<a href="#" class="carousel-prev">«</a>{% endif %}
+      <div id="field-slideshow-{{ slideshow_id }}-carousel" class="field-slideshow-carousel">
+  {% endif %}
+
+  {{ thumbnails }}
+
+  {% if pager == 'carousel'  %}
+      </div>
+      {% if not carousel_skin  %}<a href="#" class="carousel-next">»</a>{% endif %}
+    </div>
+  {% endif %}
+
+{% endif %}

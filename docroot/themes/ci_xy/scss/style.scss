@@ -1,0 +1,54 @@
+/* THEME
+ * Describe how modules or layouts might look (global modifiers)
+ */
+@import "theme/variables";
+
+/* BASE
+ * Defaults e.g, html, body
+ * No css classes permitted in Base elements
+ */
+ @import "base/elements";
+ @import "base/typography";
+
+/* COMPONENT
+ * Reusable, modular parts of our design
+ */
+
+// CI theme components
+@import "component/top-navigation";
+@import "component/jumbotron";
+@import "component/left-navigation";
+@import "component/main-footer";
+@import "component/global-footer";
+
+/* LAYOUT
+ * Holds one or more modules together
+ */
+
+/* STATE
+ * How our modules or layouts will look when in a particular state. (e.x. hover, active, media query)
+ */
+
+/* BOOTSTRAP
+ * version: 3.3.7
+ */
+
+// Bootstrap Framework.
+@import '../bootstrap/assets/stylesheets/bootstrap';
+
+// Bootstrap Components.
+@import "component/alert";
+@import "component/ajax";
+@import "component/field";
+@import "component/file";
+@import "component/filter";
+@import "component/form";
+@import "component/icon";
+@import "component/jquery-ui/autocomplete";
+@import "component/navbar";
+@import "component/node";
+@import "component/panel";
+@import "component/progress-bar";
+@import "component/table-drag";
+@import "component/tabs";
+@import "component/toolbar";
