@@ -1,0 +1,5 @@
+id: maps
+label: 'Maps'
+revision: 0
+description: 'Create a block with an embedded Google Map.'
+langcode: en
