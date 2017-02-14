@@ -57,6 +57,14 @@
  */
 #}
 {% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{# Branding #}
+{% block branding %}
+  <header role="banner" class="{{ container }}">
+    {{ page.branding }}
+    {{ page.search }}
+  </header>
+{% endblock %}
+{{ page.jumbotron }}
 {# Navbar #}
 {% if page.navigation or page.navigation_collapsible %}
   {% block navbar %}
@@ -184,8 +192,29 @@
 
 {% if page.footer %}
   {% block footer %}
-    <footer class="footer {{ container }}" role="contentinfo">
-      {{ page.footer }}
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+          {{ page.footer }}
+      </div>
     </footer>
   {% endblock %}
 {% endif %}
+{% block global_footer %}
+<footer class="footer__global-footer" role="contentinfo">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <ul>
+          <li>Global footer links</li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="footer__logo">
+          <a class="logo--cogov" href="https://www.colorado.gov"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ page.global_footer }}
+</footer>
+{% endblock %}
