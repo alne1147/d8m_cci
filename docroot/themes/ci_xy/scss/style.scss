@@ -18,12 +18,13 @@
 @import "component/top-navigation";
 @import "component/jumbotron";
 @import "component/left-navigation";
-@import "component/main-footer";
-@import "component/global-footer";
+// @import "component/main-footer";
+// @import "component/global-footer";
 
 /* LAYOUT
  * Holds one or more modules together
  */
+ @import "layout/footer";
 
 /* STATE
  * How our modules or layouts will look when in a particular state. (e.x. hover, active, media query)
