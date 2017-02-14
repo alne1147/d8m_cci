@@ -67,7 +67,7 @@ gulp.task('watch', function() {
   });
 
   // watch scss, js, and tpl files and clear drupal theme cache on change, reload browsers
-  gulp.watch(['scss/**/*.scss', 'js/**/*.js', 'js/**/*.jsx', 'templates/**/*.tpl.php'], function() {
+  gulp.watch(['scss/**/*.scss', 'js/**/*.js', 'js/**/*.jsx', 'templates/**/*.twig'], function() {
     gulp.run('sass');
     gulp.run('react');
     gulp.run('compress');
