@@ -1,0 +1,10 @@
+administer domain aliases:
+  title: 'Administer all domain aliases'
+create domain aliases:
+  title: 'Create domain aliases'
+edit domain aliases:
+  title: 'Edit domain aliases'
+delete domain aliases:
+  title: 'Delete domain aliases'
+view domain aliases:
+  title: 'View aliases for assigned domains'
