@@ -1,0 +1,27 @@
+/* FOOTER
+ 1. <footer> element styling
+ 2. footer__global-footer
+ 3. Colorado.gov logo
+ */
+
+//[1]
+footer {
+  background-color: $color-brand-slate;
+}
+
+// [3]
+.logo--cogov {
+  background-image: url(../images/cogov_logo-white.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  display:block;
+  height:28px;
+  opacity: .64;
+}
+@media (min-width: $screen-sm) {
+}
+@media (min-width: $screen-md) {
+  .logo--cogov {
+    background-position: right
+  }
+}
