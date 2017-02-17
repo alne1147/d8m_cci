@@ -1,0 +1,22 @@
+uuid: db426bcf-07c2-4b23-92b0-0d40621916b9
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: jQQUUWN2Uxr5qZtc9zcJKBCxpKY8orN1u2HPqYYRQDI
+id: ci_xy_powered
+theme: ci_xy
+region: branding
+weight: 10
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

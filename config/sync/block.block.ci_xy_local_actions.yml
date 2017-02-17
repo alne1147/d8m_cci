@@ -1,0 +1,20 @@
+uuid: 3f39ef9f-dd11-4704-aa54-58a0d56f059d
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: ci_xy_local_actions
+theme: ci_xy
+region: content
+weight: -20
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

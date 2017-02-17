@@ -1,0 +1,22 @@
+uuid: 700f45ce-a030-4661-90eb-75ac6e6aeaaa
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: ci_xy_breadcrumbs
+theme: ci_xy
+region: branding
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  provider: system
+  label_display: '0'
+visibility: {  }

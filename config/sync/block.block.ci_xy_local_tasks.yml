@@ -1,0 +1,22 @@
+uuid: 5108867d-4ead-456f-af76-44963bfe5230
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: ci_xy_local_tasks
+theme: ci_xy
+region: content
+weight: -40
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }
