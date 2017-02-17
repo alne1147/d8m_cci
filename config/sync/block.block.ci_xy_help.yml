@@ -1,0 +1,22 @@
+uuid: c13deba4-3d62-4b81-9699-b980c469f7a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: ci_xy_help
+theme: ci_xy
+region: content
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  provider: help
+  label_display: '0'
+visibility: {  }

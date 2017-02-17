@@ -1,0 +1,25 @@
+uuid: ac046b6e-79f4-4ce9-a727-a81410d57782
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: ci_xy_branding
+theme: ci_xy
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

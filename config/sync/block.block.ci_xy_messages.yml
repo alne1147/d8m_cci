@@ -1,0 +1,22 @@
+uuid: b5df0f90-181b-4b2d-9b12-35af743e0cb4
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: ci_xy_messages
+theme: ci_xy
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

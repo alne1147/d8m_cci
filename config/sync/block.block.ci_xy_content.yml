@@ -1,0 +1,22 @@
+uuid: 8a41aa1c-e002-40bf-be8f-4e58502f4e8b
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ci_xy
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: ci_xy_content
+theme: ci_xy
+region: content
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }
