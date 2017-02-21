@@ -1,0 +1,10 @@
+uuid: db6782eb-46d4-4081-baaf-3453a5cadeed
+langcode: en
+status: true
+dependencies:
+  module:
+    - contact
+id: contact_message.token
+label: Token
+targetEntityType: contact_message
+cache: true

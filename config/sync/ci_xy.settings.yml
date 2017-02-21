@@ -1,0 +1,20 @@
+cdn_provider: ''
+_core:
+  default_config_hash: _5qrDuRmWmRVjW00si3U1s1NrgrocA4N653EYGRfgEE
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: profiles/lightning/favicon.ico
+  url: 'http://coloradod8mdev.prod.acquia-sites.com/profiles/lightning/favicon.ico'
+  use_default: false
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  path: profiles/lightning/lightning.png
+  url: ''
+  use_default: false
+schemas:
+  bootstrap: 8000
+  ci_xy: 8000

@@ -777,3 +777,6 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
   require $_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR'] . '/cld_prod_coloradod8m_dev_default.inc';
 }
 // </DDSETTINGS>
+
+// Changing config directory so it's in version control
+$config_directories[CONFIG_SYNC_DIRECTORY] = '../config/sync';
