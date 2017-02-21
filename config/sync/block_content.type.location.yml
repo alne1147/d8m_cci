@@ -1,0 +1,8 @@
+uuid: b008dab9-71f1-42a5-a4fa-bdba016e02c9
+langcode: en
+status: true
+dependencies: {  }
+id: location
+label: 'Location Block'
+revision: 1
+description: 'A custom block with an address field that displays a Google Map.'

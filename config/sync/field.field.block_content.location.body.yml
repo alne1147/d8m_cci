@@ -1,0 +1,22 @@
+uuid: f4820d86-e313-4341-95ed-c36a4700d266
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.location
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.location.body
+field_name: body
+entity_type: block_content
+bundle: location
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

@@ -1,0 +1,39 @@
+uuid: cc537d95-3703-4468-8f5d-38e00c6de841
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.location
+    - field.field.block_content.location.body
+    - field.field.block_content.location.field_address
+  module:
+    - text
+    - workbench_moderation
+id: block_content.location.default
+targetEntityType: block_content
+bundle: location
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      placeholder: ''
+      summary_rows: 3
+    third_party_settings: {  }
+  field_address:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  info:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
