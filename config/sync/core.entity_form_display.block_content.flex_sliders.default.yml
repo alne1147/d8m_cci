@@ -1,0 +1,46 @@
+uuid: 4bd0a39f-0ef1-4b6d-ae0d-ec4362684567
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flex_sliders
+    - entity_browser.browser.image_browser
+    - field.field.block_content.flex_sliders.body
+    - field.field.block_content.flex_sliders.field_images
+  module:
+    - entity_browser
+    - text
+    - workbench_moderation
+id: block_content.flex_sliders.default
+targetEntityType: block_content
+bundle: flex_sliders
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_images:
+    type: entity_browser_file
+    weight: 1
+    settings:
+      entity_browser: image_browser
+      field_widget_edit: true
+      field_widget_remove: true
+      view_mode: default
+      preview_image_style: thumbnail
+      open: true
+      selection_mode: selection_append
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

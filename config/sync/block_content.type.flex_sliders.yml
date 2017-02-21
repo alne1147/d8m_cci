@@ -1,0 +1,8 @@
+uuid: d5b739a3-e983-4c1c-8e16-cf499cb4ecf0
+langcode: en
+status: true
+dependencies: {  }
+id: flex_sliders
+label: 'Flex Sliders'
+revision: 1
+description: 'A slideshow block using the Flexslider Javascript library.'

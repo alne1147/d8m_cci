@@ -1,0 +1,34 @@
+uuid: 211ff98f-9fd2-415b-9b5f-1e74e6ad6d60
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flex_sliders
+    - field.field.block_content.flex_sliders.body
+    - field.field.block_content.flex_sliders.field_images
+    - image.style.flexslider_full
+  module:
+    - flexslider_fields
+    - text
+id: block_content.flex_sliders.default
+targetEntityType: block_content
+bundle: flex_sliders
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+  field_images:
+    weight: 0
+    label: hidden
+    settings:
+      optionset: default
+      image_style: flexslider_full
+      caption: '1'
+      image_link: ''
+    third_party_settings: {  }
+    type: flexslider
+hidden: {  }

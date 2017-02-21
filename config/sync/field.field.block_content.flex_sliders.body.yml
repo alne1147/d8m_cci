@@ -1,0 +1,22 @@
+uuid: b6581571-3f6b-4746-93db-f336bcfaff1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.flex_sliders
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.flex_sliders.body
+field_name: body
+entity_type: block_content
+bundle: flex_sliders
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary
