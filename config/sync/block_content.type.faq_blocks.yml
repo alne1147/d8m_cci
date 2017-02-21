@@ -1,0 +1,8 @@
+uuid: 6051cbf8-4ad9-414d-b7f9-c6e9296793dc
+langcode: en
+status: true
+dependencies: {  }
+id: faq_blocks
+label: 'FAQ Blocks'
+revision: 1
+description: 'Questions and Answer Block using accordion animation.'
