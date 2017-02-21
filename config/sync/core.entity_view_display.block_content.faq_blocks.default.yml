@@ -1,0 +1,36 @@
+uuid: 1201e73b-cdf4-428b-a68b-d52d839a3cc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.faq_blocks
+    - field.field.block_content.faq_blocks.body
+    - field.field.block_content.faq_blocks.field_faq
+  module:
+    - faqfield
+    - text
+id: block_content.faq_blocks.default
+targetEntityType: block_content
+bundle: faq_blocks
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+  field_faq:
+    weight: 1
+    label: hidden
+    settings:
+      active: 0
+      heightStyle: auto
+      collapsible: false
+      event: click
+      animate:
+        easing: linear
+        duration: 200
+    third_party_settings: {  }
+    type: faqfield_accordion
+hidden: {  }

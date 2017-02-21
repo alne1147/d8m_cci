@@ -1,0 +1,46 @@
+uuid: c5f0239e-ae56-4c2b-938f-2da711ecd5bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.faq_blocks
+    - field.field.block_content.faq_blocks.body
+    - field.field.block_content.faq_blocks.field_faq
+  module:
+    - faqfield
+    - text
+    - workbench_moderation
+id: block_content.faq_blocks.default
+targetEntityType: block_content
+bundle: faq_blocks
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 6
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_faq:
+    weight: 7
+    settings:
+      answer_widget: text_format
+      question_title: Question
+      answer_title: Answer
+      advanced:
+        question_length: 255
+        question_size: 100
+        question_rows: 0
+        answer_rows: 3
+    third_party_settings: {  }
+    type: faqfield_default
+  info:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
