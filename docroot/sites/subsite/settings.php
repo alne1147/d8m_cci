@@ -749,10 +749,10 @@ $settings['file_scan_ignore_directories'] = [
  *
  * Keep this code block at the end of this file to take full effect.
  */
-#
-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-#   include $app_root . '/' . $site_path . '/settings.local.php';
-# }
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
+}
 
 // <DDSETTINGS>
 // Please don't edit anything between <DDSETTINGS> tags.
@@ -762,3 +762,7 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 }
 // </DDSETTINGS>
 $settings['install_profile'] = 'lightning';
+
+if (file_exists('/var/www/site-php')) {
+  require '/var/www/site-php/coloradod8m/subsite-settings.inc';
+}
