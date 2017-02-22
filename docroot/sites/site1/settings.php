@@ -778,5 +778,3 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 }
 // </DDSETTINGS>
 
-// Changing config directory so it's in version control
-$config_directories[CONFIG_SYNC_DIRECTORY] = '../config/sync';
