@@ -3,7 +3,6 @@ module:
   block: 0
   block_content: 0
   block_styles: 0
-  bootstrap_layouts: 0
   breakpoint: 0
   ci_layouts: 0
   ckeditor: 0
