@@ -14,7 +14,14 @@ lightning_extensions:
 # List of additional modules to enable after Lightning is installed.
 modules:
   - features
-  - colorado_interactive_dural_feature
+  - config_ignore
+  - faqfield
+  - field_slideshow
+  - flexslider
+  - libraries
+  - linkit
+  - masquerade
+  - simple_gmap
 #
 #
 # # A system path to redirect to once installation is complete.
