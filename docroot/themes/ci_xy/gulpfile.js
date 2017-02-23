@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var shell = require('gulp-shell');
@@ -8,8 +7,15 @@ var browserSync = require('browser-sync');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var react = require('gulp-react');
 
+// BrowserSync
+gulp.task('browser-sync', ['sass', 'compress'], function() {
+    browserSync.init({
+        proxy: "d8cogov.dev.dd:8888"
+    });
+});
+
+// Sass processing
 gulp.task('sass', function () {
   return gulp.src('./scss/**/*.scss')
     .pipe(sourcemaps.init())
@@ -22,6 +28,7 @@ gulp.task('sass', function () {
     }))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./css'))
+    .pipe(browserSync.reload({stream: true}))
     .pipe(notify({
       title: "SASS Compiled",
       message: "All SASS files have been recompiled to CSS.",
@@ -29,19 +36,15 @@ gulp.task('sass', function () {
     }));
 });
 
-gulp.task('react', function () {
-    return gulp.src('js/components/**.jsx')
-        .pipe(react())
-        .pipe(gulp.dest('js/js-src'));
-});
-
+// Compress / Concat JS
 gulp.task('compress', function() {
-  return gulp.src('js/js-src/*.js')
+  return gulp.src('js/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(concat('scripts.js'))
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('js'))
+    .pipe(browserSync.reload({stream: true}))
     .pipe(notify({
       title: "JS Minified",
       message: "All JS files in the theme have been minified.",
@@ -49,7 +52,8 @@ gulp.task('compress', function() {
     }));
 });
 
-gulp.task('drush:cr', function () {
+// Run drush to clear the theme registry
+gulp.task('clearcache', function () {
   return gulp.src('', {read: false})
     .pipe(shell([
       'drush cr css-js',
@@ -61,17 +65,9 @@ gulp.task('drush:cr', function () {
     }));
 });
 
-gulp.task('watch', function() {
-  browserSync({
-    proxy: "d8cogov.dev.dd:8083"
-  });
-
-  // watch scss, js, and tpl files and clear drupal theme cache on change, reload browsers
-  gulp.watch(['scss/**/*.scss', 'js/**/*.js', 'js/**/*.jsx', 'templates/**/*.twig'], function() {
-    gulp.run('sass');
-    gulp.run('react');
-    gulp.run('compress');
-    //gulp.run('drush:cc');
-  }).on("change", browserSync.reload);
+// Default task to be run with `gulp`
+gulp.task('default', ['sass', 'browser-sync', 'compress'], function() {
+  gulp.watch("scss/**/*.scss", ['sass']);
+  gulp.watch("js/**/*.js", ['compress']);
+  gulp.watch("templates/**/*.twig").on('change', browserSync.reload);
 });
-gulp.task('default', ['watch']);
