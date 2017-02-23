@@ -28,7 +28,7 @@ assignments:
         responsive_image_style: responsive_image_style
         user_role: user_role
         entity_view_mode: entity_view_mode
-    enabled: true
+    enabled: false
     weight: 5
   dependency:
     enabled: true
@@ -75,7 +75,7 @@ assignments:
         migration: migration
         shortcut_set: shortcut_set
         tour: tour
-    enabled: true
+    enabled: false
     weight: 10
   site:
     types:
@@ -88,7 +88,7 @@ assignments:
         taxonomy_vocabulary: taxonomy_vocabulary
         editor: editor
         filter_format: filter_format
-    enabled: true
+    enabled: false
     weight: 7
-profile_name: ''
+profile_name: lightning
 is_profile: false
