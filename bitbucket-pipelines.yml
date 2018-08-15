@@ -4,11 +4,8 @@ pipelines:
   default:
     - step:
         script:
-          - cd docroot/themes/ci_xy
+          - cd docroot
+          - sh local-install.sh
+          - cd themes/ci_xy
           - npm rebuild node-sass
           - gulp sass
-          - git config remote.origin.url https://alne1147@bitbucket.org/coloradointeractive/d8.git
-                    - git config --global user.name "alne1147"
-                    - git config --global user.email "alfredo.nevarez@www.colorado.gov"
-                    - git commit -a -m "Compiled by Pipelines"
-                    - git push
