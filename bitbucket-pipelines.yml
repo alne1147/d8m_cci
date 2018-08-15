@@ -11,3 +11,4 @@ pipelines:
           - cd docroot/themes/ci_xy
           - npm rebuild node-sass
           - gulp
+          - git status
