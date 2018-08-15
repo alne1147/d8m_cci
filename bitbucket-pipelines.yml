@@ -9,4 +9,5 @@ pipelines:
     - step:
         script:
           - cd docroot/themes/ci_xy
+          - npm rebuild node-sass
           - gulp
