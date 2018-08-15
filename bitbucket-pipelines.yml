@@ -4,8 +4,6 @@ pipelines:
   default:
     - step:
         script:
-          - cd docroot
-          - sh local-install.sh
-          - cd themes/ci_xy
+          - cd docroot/themes/ci_xy
           - npm rebuild node-sass
           - gulp sass
