@@ -8,5 +8,5 @@ pipelines:
   default:
     - step:
         script:
-          - cd docroot
-          - drush cr
+          - cd docroot/themes/ci_xy
+          - gulp
