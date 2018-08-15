@@ -8,7 +8,7 @@ pipelines:
           - npm rebuild node-sass
           - gulp sass
           - git config remote.origin.url https://alne1147@bitbucket.org/coloradointeractive/d8.git
-                    - git config user.name "alne1147"
-                    - git config user.email "alfredo.nevarez@www.colorado.gov"
+                    - git config --global user.name "alne1147"
+                    - git config --global user.email "alfredo.nevarez@www.colorado.gov"
                     - git commit -a -m "Compiled by Pipelines"
                     - git push
