@@ -12,3 +12,5 @@ pipelines:
           - npm rebuild node-sass
           - gulp sass
           - git status
+          - git commit -a -m"Compiled by bb pipelines."
+          - git push origin
