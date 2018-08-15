@@ -1,5 +1,5 @@
 image: 
-  name: luamas/ruby-node-sass
+  name: virgiliu/node-gulp-sass
   username: $DOCKER_HUB_USERNAME
   password: $DOCKER_HUB_PASSWORD
   email: $DOCKER_HUB_EMAIL
