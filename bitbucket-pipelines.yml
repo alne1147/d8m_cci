@@ -1,9 +1,5 @@
 image: 
   name: virgiliu/node-gulp-sass
-  username: $DOCKER_HUB_USERNAME
-  password: $DOCKER_HUB_PASSWORD
-  email: $DOCKER_HUB_EMAIL
-  
 pipelines:
   default:
     - step:
@@ -14,5 +10,5 @@ pipelines:
           - git config remote.origin.url https://alne1147@bitbucket.org/coloradointeractive/d8.git
                     - git config user.name "alne1147"
                     - git config user.email "alfredo.nevarez@www.colorado.gov"
-                    - git commit -m "Compiled by Pipelines"
+                    - git commit -a -m "Compiled by Pipelines"
                     - git push
